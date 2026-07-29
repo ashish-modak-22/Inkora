@@ -17,11 +17,13 @@ import retrofit2.http.POST
 
 interface ApiService {
 
+    // New user registration API
     @POST("/auth/register")
     suspend fun registerUser(
         @Body request: RegisterRequest
     ): Response<RegisterResponse>
 
+    // User login API
     @POST("/auth/login")
     suspend fun loginUser(
         @Body request: LoginRequest
