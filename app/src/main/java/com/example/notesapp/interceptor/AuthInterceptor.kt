@@ -31,6 +31,7 @@ class AuthInterceptor(context: Context): Interceptor {
         }
 
         // Add authorization header if JWT token exists
+        // The nullability inside the if block is used to confirm if the login is done and DataStore contains some JWT token
         if(!token.isNullOrEmpty()) {
             newRequest.addHeader(
                 "Authorization",
