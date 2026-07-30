@@ -25,11 +25,18 @@ class AuthInterceptor(context: Context): Interceptor {
         // Creating a builder from the original request
         val newRequest = request.newBuilder()
 
-        // Adding a custom header to the HTTP client --> Header gives some extra information about the request
-        newRequest.addHeader(
-            "App-Version",
-            "1.0"
-        )
+        // Reading the JWT token from the DataStore. 'runBlocking' keeps us wait until we get the token
+        val token = runBlocking {
+            tokenManager.getToken().first()
+        }
+
+        // Add authorization header if JWT token exists
+        if(!token.isNullOrEmpty()) {
+            newRequest.addHeader(
+                "Authorization",
+                "Bearer $token"
+            )
+        }
 
         // It will send the request to the server
         return chain.proceed(request)
