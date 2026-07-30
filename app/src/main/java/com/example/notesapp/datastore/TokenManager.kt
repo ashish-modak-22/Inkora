@@ -32,9 +32,15 @@ class TokenManager(private val context: Context) {
 
     // This function will read the JWT token from the DataStore
     fun getToken(): Flow<String?> {
-
         return context.dataStore.data.map {preferences ->
             preferences[TOKEN_KEY]
+        }
+    }
+
+    // Function to remove the JWT token from Datastore when user logs out from the current account
+    suspend fun clearToken() {
+        context.dataStore.edit { preferences ->
+            preferences.remove(TOKEN_KEY)
         }
     }
 }
