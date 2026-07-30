@@ -22,6 +22,15 @@ class AuthInterceptor(context: Context): Interceptor {
         // It receives the requests send by Retrofit
         val request = chain.request()
 
+        // Creating a builder from the original request
+        val newRequest = request.newBuilder()
+
+        // Adding a custom header to the HTTP client --> Header gives some extra information about the request
+        newRequest.addHeader(
+            "App-Version",
+            "1.0"
+        )
+
         // It will send the request to the server
         return chain.proceed(request)
     }
