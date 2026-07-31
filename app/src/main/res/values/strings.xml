@@ -6,4 +6,10 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="new_user_register_here">New User ? Register Here</string>
+    <string name="create_account">Create account</string>
+    <string name="your_name">Your name</string>
+    <string name="your_email_id">Your email ID</string>
+    <string name="set_password">Set Password</string>
+    <string name="register_here">Register here</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
 </resources>
