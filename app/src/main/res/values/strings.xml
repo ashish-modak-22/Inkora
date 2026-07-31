@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NotesApp</string>
     <string name="ashish">Ashish</string>
+    <string name="notes_app">Notes App</string>
+    <string name="email_id">Email Id</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_user_register_here">New User ? Register Here</string>
 </resources>
