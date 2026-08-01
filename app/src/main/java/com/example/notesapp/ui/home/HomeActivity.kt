@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.databinding.ActivityHomeBinding
+import android.content.Intent
+import com.example.notesapp.ui.addnote.AddNoteActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -28,5 +30,11 @@ class HomeActivity : AppCompatActivity() {
 
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = adapter
+
+        binding.fabAddNote.setOnClickListener {
+
+            intent = Intent(this, AddNoteActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
