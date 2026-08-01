@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.databinding.ItemNoteBinding
+import com.example.notesapp.model.NoteResponse
 
 class NoteAdapter(
-    private val noteList: List<String>
+    private var noteList: List<NoteResponse>
 ): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     inner class NoteViewHolder(
         private val binding: ItemNoteBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(note: String) {
-            binding.tvTitle.text = note
-            binding.tvDescription.text = "This is a sample description."
+        fun bind(note: NoteResponse) {
+            binding.tvTitle.text = note.title
+            binding.tvDescription.text = note.content
         }
     }
 
@@ -35,5 +36,10 @@ class NoteAdapter(
 
     override fun getItemCount(): Int {
         return noteList.size
+    }
+
+    fun updateNotes(newNotes: List<NoteResponse>){
+        noteList = newNotes
+        notifyDataSetChanged()
     }
 }
