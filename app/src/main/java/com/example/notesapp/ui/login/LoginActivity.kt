@@ -10,15 +10,21 @@ import androidx.lifecycle.lifecycleScope
 import com.example.notesapp.api.RetrofitInstance
 import com.example.notesapp.ui.home.HomeActivity
 import kotlinx.coroutines.launch
+import com.example.notesapp.datastore.TokenManager
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var tokenManager: TokenManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        tokenManager = TokenManager(this)
+
 
         binding.registerTextView.setOnClickListener {
 
@@ -50,10 +56,15 @@ class LoginActivity : AppCompatActivity() {
                 if(response.isSuccessful){
 
                     val loginResponse = response.body()
-                    Toast.makeText(this@LoginActivity, loginResponse?.accessToken, Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-                    finish()
+
+                    if(loginResponse != null){
+                        tokenManager.saveToken(loginResponse.accessToken)
+                        Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                        finish()
+                    }
                 }
+
                 else{
                     Toast.makeText(
                         this@LoginActivity,

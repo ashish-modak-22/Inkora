@@ -10,11 +10,14 @@ import com.example.notesapp.model.RegisterRequest
 import com.example.notesapp.model.RegisterResponse
 import com.example.notesapp.model.LoginRequest
 import com.example.notesapp.model.LoginResponse
+import com.example.notesapp.model.NoteResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Header
 
 
 interface ApiService {
@@ -34,4 +37,11 @@ interface ApiService {
         @Field("password")
         password: String
     ): Response<LoginResponse>
+
+    @GET("/notes/")
+    suspend fun getAllNotes(
+        @Header("Authorization")
+        token: String
+    ): Response<List<NoteResponse>>
+
 }
