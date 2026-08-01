@@ -13,6 +13,8 @@ import com.example.notesapp.model.LoginResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 
 
 interface ApiService {
@@ -23,9 +25,13 @@ interface ApiService {
         @Body request: RegisterRequest
     ): Response<RegisterResponse>
 
-    // User login API
+    // User login API ---> This format is used because the backend API uses "form type credentials" instead of JSON
+    @FormUrlEncoded
     @POST("/auth/login")
     suspend fun loginUser(
-        @Body request: LoginRequest
+        @Field("username")
+        email: String,
+        @Field("password")
+        password: String
     ): Response<LoginResponse>
 }
