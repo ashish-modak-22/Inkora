@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.notesapp.databinding.ActivityLoginBinding
 import android.content.Intent
 import com.example.notesapp.ui.register.RegisterActivity
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.notesapp.api.RetrofitInstance
+import com.example.notesapp.ui.home.HomeActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,5 +26,50 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.loginButton.setOnClickListener {
+
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+
+            if(email.isEmpty() || password.isEmpty()) {
+
+                Toast.makeText(this, "Please fill al fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            loginUser(email, password)
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        lifecycleScope.launch {
+
+            try {
+                val response = RetrofitInstance.api.loginUser(email, password)
+
+                if(response.isSuccessful){
+
+                    val loginResponse = response.body()
+                    Toast.makeText(this@LoginActivity, loginResponse?.accessToken, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    finish()
+                }
+                else{
+                    Toast.makeText(
+                        this@LoginActivity,
+                        response.errorBody()?.string() ?: "Login Failed",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            catch(e: Exception){
+                Toast.makeText(
+                    this@LoginActivity,
+                    e.localizedMessage,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }
