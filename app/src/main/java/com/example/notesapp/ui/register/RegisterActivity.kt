@@ -1,6 +1,7 @@
 package com.example.notesapp.ui.register
 
 import android.content.Intent
+import android.content.SyncResult
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notesapp.databinding.ActivityRegisterBinding
@@ -41,34 +42,47 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val request = RegisterRequest(name=name, email=email, password=password)
+            registerUser(name, email, password)
+        }
+    }
 
-            lifecycleScope.launch {
+    private fun registerUser(
+        name: String,
+        email: String,
+        password: String
+    ) {
+        lifecycleScope.launch {
 
-                try {
+            try {
 
-                    val response = RetrofitInstance.api.registerUser(request)
+                val request = RegisterRequest(name=name, email=email, password=password)
+                val response = RetrofitInstance.api.registerUser(request)
 
-                    if(response.isSuccessful){
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            "Registration Successful",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                if(response.isSuccessful){
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Registration Successful",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                        startActivity(
-                            Intent(
-                                this@RegisterActivity, LoginActivity::class.java
-                            )
-                        )
-
-                        finish()
-
-                    }
-                    else {
-                        Toast.makeText(this@RegisterActivity, response.message(), Toast.LENGTH_SHORT).show()
-                    }
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                    finish()
                 }
+                else{
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        response.errorBody()?.string() ?: "Registration Failed",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            catch (e: Exception){
+                Toast.makeText(
+                    this@RegisterActivity,
+                    e.localizedMessage ?: "Something went wrong",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
