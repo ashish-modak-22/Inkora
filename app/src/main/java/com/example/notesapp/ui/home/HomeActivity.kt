@@ -40,7 +40,18 @@ class HomeActivity : AppCompatActivity() {
             intent = Intent(this, AddNoteActivity::class.java)
             startActivity(intent)
         }
+
+        binding.logoutButton.setOnClickListener {
+
+            lifecycleScope.launch {
+                tokenManager.clearToken()
+
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finish()
+            }
+        }
     }
+
 
     private fun loadNotes() {
 
