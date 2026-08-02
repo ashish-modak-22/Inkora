@@ -74,7 +74,15 @@ class HomeActivity : AppCompatActivity() {
                     noteAdapter.updateNotes(notes)
                 }
                 else {
-                    Toast.makeText(this@HomeActivity, "Failed to load notes", Toast.LENGTH_SHORT).show()
+                    if(response.code() == 401){
+                        tokenManager.clearToken()
+                        startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                        finish()
+                    }
+                    else{
+                        Toast.makeText(this@HomeActivity,"Failed to load notes",Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
             catch (e: Exception){
