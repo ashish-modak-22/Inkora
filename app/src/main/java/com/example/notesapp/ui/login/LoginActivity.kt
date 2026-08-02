@@ -11,6 +11,8 @@ import com.example.notesapp.api.RetrofitInstance
 import com.example.notesapp.ui.home.HomeActivity
 import kotlinx.coroutines.launch
 import com.example.notesapp.datastore.TokenManager
+import kotlinx.coroutines.flow.first
+import androidx.lifecycle.lifecycleScope
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,6 +26,21 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tokenManager = TokenManager(this)
+
+
+        lifecycleScope.launch {
+
+            val token = tokenManager.getToken().first()
+
+            lifecycleScope.launch {
+                val token = tokenManager.getToken().first()
+
+                if(!token.isNullOrEmpty()){
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    finish()
+                }
+            }
+        }
 
 
         binding.registerTextView.setOnClickListener {
