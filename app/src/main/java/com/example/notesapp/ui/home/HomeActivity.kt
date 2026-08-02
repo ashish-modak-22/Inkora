@@ -6,10 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.databinding.ActivityHomeBinding
 import android.content.Intent
 import com.example.notesapp.ui.addnote.AddNoteActivity
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.notesapp.api.RetrofitInstance
+import com.example.notesapp.datastore.TokenManager
+import com.example.notesapp.model.NoteResponse
+import com.example.notesapp.ui.login.LoginActivity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var tokenManager: TokenManager
+    private lateinit var noteAdapter: NoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,24 +27,48 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val noteList = listOf(
-            "Learn Kotlin",
-            "FastAPI Backend",
-            "MVVM Structure",
-            "Prepare for SIH",
-            "DSA dynamic programming",
-            "Improve the UI/UX"
-        )
-
-        val adapter = NoteAdapter(noteList)
+        tokenManager = TokenManager(this)
+        noteAdapter = NoteAdapter(emptyList())
 
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
-        binding.rvNotes.adapter = adapter
+        binding.rvNotes.adapter = noteAdapter
+
+        loadNotes()
 
         binding.fabAddNote.setOnClickListener {
 
             intent = Intent(this, AddNoteActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun loadNotes() {
+
+        lifecycleScope.launch{
+
+            try {
+
+                val token = tokenManager.getToken().first()
+
+                if(token == null){
+                    startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                    finish()
+                    return@launch
+                }
+
+                val response = RetrofitInstance.api.getAllNotes("Bearer $token")
+
+                if(response.isSuccessful) {
+                    val notes = response.body()?:emptyList()
+                    noteAdapter.updateNotes(notes)
+                }
+                else {
+                    Toast.makeText(this@HomeActivity, "Failed to load notes", Toast.LENGTH_SHORT).show()
+                }
+            }
+            catch (e: Exception){
+                Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
