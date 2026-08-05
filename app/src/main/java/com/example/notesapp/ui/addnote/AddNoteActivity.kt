@@ -36,18 +36,21 @@ class AddNoteActivity : AppCompatActivity() {
 
             if(title.isEmpty() || content.isEmpty()) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
-            }
-            return@setOnClickListener
-        }
+                return@setOnClickListener
 
-        createNote(title, content)
+            }
+            createNote(title, content)
+        }
     }
 
-    private fun createNote(title: String, content: String) {
+
+    private fun createNote(title: String, content: String){
+
         lifecycleScope.launch {
             try {
                 val token = tokenManager.getToken().first()
-                if(token == null) {
+
+                if(token == null){
                     Toast.makeText(this@AddNoteActivity, "Please login again", Toast.LENGTH_SHORT).show()
                     finish()
                     return@launch
@@ -55,37 +58,19 @@ class AddNoteActivity : AppCompatActivity() {
 
                 val response = RetrofitInstance.api.createNote(
                     "Bearer $token",
-                    NoteRequest(title = title, content = content)
+                    NoteRequest(title=title, content=content)
                 )
 
-                if (response.isSuccessful) {
-
-                    Toast.makeText(
-                        this@AddNoteActivity,
-                        "Note Created",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                if(response.isSuccessful){
+                    Toast.makeText(this@AddNoteActivity, "Note Created", Toast.LENGTH_SHORT).show()
                     finish()
-
-                } else {
-
-                    Toast.makeText(
-                        this@AddNoteActivity,
-                        "Failed to create note",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                 }
-
-            } catch (e: Exception) {
-
-                Toast.makeText(
-                    this@AddNoteActivity,
-                    e.localizedMessage,
-                    Toast.LENGTH_LONG
-                ).show()
-
+                else{
+                    Toast.makeText(this@AddNoteActivity, "Failed to create note", Toast.LENGTH_SHORT).show()
+                }
+            }
+            catch (e: Exception) {
+                Toast.makeText(this@AddNoteActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
             }
         }
     }
