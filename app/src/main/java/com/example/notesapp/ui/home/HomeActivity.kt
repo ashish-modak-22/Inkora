@@ -33,8 +33,6 @@ class HomeActivity : AppCompatActivity() {
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter
 
-        loadNotes()
-
         binding.fabAddNote.setOnClickListener {
 
             intent = Intent(this, AddNoteActivity::class.java)
@@ -50,6 +48,12 @@ class HomeActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        loadNotes()
     }
 
 
