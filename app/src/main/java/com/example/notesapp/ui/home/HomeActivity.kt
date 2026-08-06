@@ -28,7 +28,13 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tokenManager = TokenManager(this)
-        noteAdapter = NoteAdapter(emptyList())
+        noteAdapter = NoteAdapter(emptyList()) { note ->
+            val intent = Intent(this, AddNoteActivity::class.java)
+            intent.putExtra("note_id", note.id)
+            intent.putExtra("note_content", note.content)
+
+            startActivity(intent)
+        }
 
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter

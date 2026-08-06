@@ -8,7 +8,8 @@ import com.example.notesapp.databinding.ItemNoteBinding
 import com.example.notesapp.model.NoteResponse
 
 class NoteAdapter(
-    private var noteList: List<NoteResponse>
+    private var noteList: List<NoteResponse>,
+    private val onNoteClick: (NoteResponse) -> Unit
 ): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     inner class NoteViewHolder(
@@ -18,6 +19,10 @@ class NoteAdapter(
         fun bind(note: NoteResponse) {
             binding.tvTitle.text = note.title
             binding.tvDescription.text = note.content
+
+            binding.root.setOnClickListener {
+                onNoteClick(note)
+            }
         }
     }
 
