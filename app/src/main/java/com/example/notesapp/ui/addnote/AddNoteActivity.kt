@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 
 class AddNoteActivity : AppCompatActivity() {
 
+    private var noteId: Int = -1
+    private var isEditMode = false
+
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var tokenManager: TokenManager
 
@@ -25,6 +28,19 @@ class AddNoteActivity : AppCompatActivity() {
         tokenManager = TokenManager(this)
 
 
+        // Read the data from Intent
+        noteId = intent.getIntExtra("note_id", -1)
+
+        if(noteId != -1){
+            isEditMode = true
+            binding.titleEditText.setText(intent.getStringExtra("note_title"))
+
+            binding.contentEditText.setText(intent.getStringExtra("note_content"))
+
+            binding.saveButton.text = "Update Note"
+        }
+
+
         binding.saveButton.setOnClickListener {
 
             val title = binding.titleEditText.text.toString().trim()
@@ -35,7 +51,12 @@ class AddNoteActivity : AppCompatActivity() {
                 return@setOnClickListener
 
             }
-            createNote(title, content)
+           if(isEditMode) {
+               updateNote(noteId, title, content)
+           }
+            else {
+                createNote(title, content)
+           }
         }
     }
 
@@ -66,6 +87,31 @@ class AddNoteActivity : AppCompatActivity() {
                 }
             }
             catch (e: Exception) {
+                Toast.makeText(this@AddNoteActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun updateNote(noteId: Int, title: String, content: String){
+        lifecycleScope.launch {
+            try{
+                val token = tokenManager.getToken().first()
+                if(token == null){
+                    Toast.makeText(this@AddNoteActivity, "Please login again", Toast.LENGTH_SHORT).show()
+                    finish()
+                    return@launch
+                }
+                val response = RetrofitInstance.api.updateNote("Bearer $token", noteId, NoteRequest(title=title, content=content))
+
+                if(response.isSuccessful){
+                    Toast.makeText(this@AddNoteActivity, "Note Updated", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                else {
+                    Toast.makeText(this@AddNoteActivity, "Failed to update note", Toast.LENGTH_SHORT).show()
+                }
+            }
+            catch (e: Exception){
                 Toast.makeText(this@AddNoteActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
             }
         }
