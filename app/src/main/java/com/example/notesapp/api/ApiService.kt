@@ -19,6 +19,8 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import com.example.notesapp.model.NoteRequest
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 
 interface ApiService {
@@ -50,6 +52,18 @@ interface ApiService {
         @Header("Authorization")
         token: String,
         @Body request: NoteRequest
+    ): Response<NoteResponse>
+
+    @PUT("/notes/{note_id")
+    suspend fun updateNote(
+        @Header("Authorization")
+        token: String,
+
+        @Path("note_id")
+        noteId: Int,
+
+        @Body
+        request: NoteRequest
     ): Response<NoteResponse>
 
 }
