@@ -22,6 +22,7 @@ import com.example.notesapp.model.NoteRequest
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.DELETE
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -45,7 +46,17 @@ interface ApiService {
     @GET("/notes/")
     suspend fun getAllNotes(
         @Header("Authorization")
-        token: String
+        token: String,
+        @Query("page")
+        page: Int=1,
+        @Query("limit")
+        limit: Int=10,
+        @Query("search")
+        search: String?=null,
+        @Query("sort_by")
+        sortBy: String = "created_at",
+        @Query("order")
+        order: String = "desc"
     ): Response<List<NoteResponse>>
 
     @POST("/notes")
@@ -65,7 +76,7 @@ interface ApiService {
         request: NoteRequest
     ): Response<NoteResponse>
 
-    @DELETE("/notes/{note_id")
+    @DELETE("/notes/{note_id}")
     suspend fun deleteNote(
         @Header("Authorization")
         token: String,
