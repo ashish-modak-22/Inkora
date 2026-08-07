@@ -21,6 +21,7 @@ import retrofit2.http.Header
 import com.example.notesapp.model.NoteRequest
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.DELETE
 
 
 interface ApiService {
@@ -58,12 +59,18 @@ interface ApiService {
     suspend fun updateNote(
         @Header("Authorization")
         token: String,
-
         @Path("note_id")
         noteId: Int,
-
         @Body
         request: NoteRequest
     ): Response<NoteResponse>
+
+    @DELETE("/notes/{note_id")
+    suspend fun deleteNote(
+        @Header("Authorization")
+        token: String,
+        @Path("note_id")
+        noteId: Int
+    ): Response<Unit>
 
 }
