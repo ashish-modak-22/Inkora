@@ -54,7 +54,7 @@ interface ApiService {
         @Body request: NoteRequest
     ): Response<NoteResponse>
 
-    @PUT("/notes/{note_id")
+    @PUT("/notes/{note_id}")
     suspend fun updateNote(
         @Header("Authorization")
         token: String,

@@ -32,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, AddNoteActivity::class.java)
             intent.putExtra("note_id", note.id)
             intent.putExtra("note_content", note.content)
+            intent.putExtra("note_title", note.title)
 
             startActivity(intent)
         }
