@@ -9,7 +9,8 @@ import com.example.notesapp.model.NoteResponse
 
 class NoteAdapter(
     private var noteList: List<NoteResponse>,
-    private val onNoteClick: (NoteResponse) -> Unit
+    private val onNoteClick: (NoteResponse) -> Unit,
+    private val onDeleteClick: (NoteResponse) -> Unit
 ): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     inner class NoteViewHolder(
@@ -22,6 +23,10 @@ class NoteAdapter(
 
             binding.root.setOnClickListener {
                 onNoteClick(note)
+            }
+
+            binding.deleteButton.setOnClickListener {
+                onDeleteClick(note)
             }
         }
     }

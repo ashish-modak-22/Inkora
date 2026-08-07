@@ -32,6 +32,15 @@
             android:text="Today I have learned about material 3 designs"
             android:textSize="14sp"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Delete"
+            android:textSize="14sp"
+            app:icon="@android:drawable/ic_menu_delete"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.card.MaterialCardView>

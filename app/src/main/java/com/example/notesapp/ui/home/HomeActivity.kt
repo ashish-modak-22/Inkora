@@ -28,14 +28,16 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tokenManager = TokenManager(this)
-        noteAdapter = NoteAdapter(emptyList()) { note ->
+        noteAdapter = NoteAdapter(emptyList(), onNoteClick = { note ->
             val intent = Intent(this, AddNoteActivity::class.java)
             intent.putExtra("note_id", note.id)
             intent.putExtra("note_content", note.content)
             intent.putExtra("note_title", note.title)
 
             startActivity(intent)
-        }
+        },
+            onDeleteClick = {note -> deleteNote(note.id) }
+        )
 
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter
@@ -100,5 +102,29 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun deleteNote(noteId: Int) {
+         lifecycleScope.launch {
+             try {
+                 val token = tokenManager.getToken().first()
+                 if(token == null){
+                     return@launch
+                 }
+
+                 val response = RetrofitInstance.api.deleteNote("Bearer $token", noteId)
+
+                 if(response.isSuccessful){
+                     Toast.makeText(this@HomeActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
+                     loadNotes()
+                 }
+                 else {
+                     Toast.makeText(this@HomeActivity, "Failed to delete note", Toast.LENGTH_SHORT).show()
+                 }
+             }
+             catch (e: Exception){
+                 Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
+             }
+         }
     }
 }
