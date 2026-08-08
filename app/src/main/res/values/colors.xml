@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <!-- Primary -->
     <color name="primary">#2563EB</color>
     <color name="primary_dark">#1D4ED8</color>
@@ -20,4 +19,14 @@
     <!-- Status -->
     <color name="success">#22C55E</color>
     <color name="error">#EF4444</color>
+        <color name="purple_primary">#6C63FF</color>
+        <color name="purple_primary_dark">#4A42D9</color>
+        <color name="purple_light">#8B7FFF</color>
+        <color name="purple_header_subtitle">#E4E1FF</color>
+        <color name="text_dark">#1A1A2E</color>
+        <color name="text_hint">#9A97B5</color>
+        <color name="error_red">#E53935</color>
+        <color name="white">#FFFFFF</color>
+        <color name="bg_screen">#EFEDFB</color>
+
 </resources>
