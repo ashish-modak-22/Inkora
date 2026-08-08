@@ -20,6 +20,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var tokenManager: TokenManager
     private lateinit var noteAdapter: NoteAdapter
+    private var currentSortBy = "created_at"
+    private var currentOrder = "desc"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,43 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.searchEditText.setOnEditorActionListener { _, _, _ ->
+            val query = binding.searchEditText.text.toString().trim()
+            loadNotes(search=query)
+            true
+        }
+
+        binding.sortButton.setOnClickListener {
+            val options = arrayOf("Newest", "Oldest", "Title A-Z", "Title Z-A")
+            android.app.AlertDialog.Builder(this)
+                .setTitle("Sort Notes")
+                .setItems(options) {_, which ->
+                    when(which) {
+                        0-> {
+                            currentSortBy="created_at"
+                            currentOrder="desc"
+                            binding.sortButton.text = "Sort: Newest"
+                        }
+                        1-> {
+                            currentSortBy="created_at"
+                            currentOrder="asc"
+                            binding.sortButton.text = "Sort: Oldest"
+                        }
+                        2 -> {
+                            currentSortBy = "title"
+                            currentOrder = "asc"
+                            binding.sortButton.text = "Sort: A-Z"
+                        }
+                        3 -> {
+                            currentSortBy = "title"
+                            currentOrder = "desc"
+                            binding.sortButton.text = "Sort: Z-A"
+                        }
+                    }
+                    loadNotes(search=binding.searchEditText.text.toString().trim())
+                }.show()
+        }
+
         binding.logoutButton.setOnClickListener {
 
             lifecycleScope.launch {
@@ -66,7 +105,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun loadNotes() {
+    private fun loadNotes(search : String? = null) {
 
         lifecycleScope.launch{
 
@@ -80,7 +119,7 @@ class HomeActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                val response = RetrofitInstance.api.getAllNotes("Bearer $token")
+                val response = RetrofitInstance.api.getAllNotes("Bearer $token", search=search, sortBy=currentSortBy, order=currentOrder)
 
                 if(response.isSuccessful) {
                     val notes = response.body()?:emptyList()
