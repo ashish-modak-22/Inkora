@@ -25,7 +25,7 @@ class NoteAdapter(
                 onNoteClick(note)
             }
 
-            binding.deleteButton.setOnClickListener {
+            binding.tvNoteDate.setOnClickListener {
                 onDeleteClick(note)
             }
         }

@@ -38,8 +38,8 @@
     <color name="on_card_secondary">#B4AEDD</color>
     <color name="on_card_hint">#8A84B8</color>
 
-    <color name="card_register_solid">#4A4090</color>
-    <color name="card_register_light">#5B4FAE</color>
+    <color name="card_register_solid">#211D45</color>
+    <color name="card_register_light">#2E2860</color>
     <color name="on_register_primary">#F5F4FF</color>
     <color name="on_register_secondary">#C7C1EA</color>
     <color name="on_register_hint">#A29CC9</color>
