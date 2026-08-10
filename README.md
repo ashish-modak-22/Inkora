@@ -84,7 +84,7 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 ## 📸 Screenshots
 
 | Login | Register | Home | Add Note | Update Note |
-|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|:---:|
 | <img src="ScreenShots/Login_Screen.jpeg" width="200"/> | <img src="ScreenShots/Reg_Screen.jpeg" width="200"/> | <img src="ScreenShots/Home_Screen.jpeg" width="200"/> | <img src="ScreenShots/Create_Note_Screen.jpeg" width="200"/> | <img src="ScreenShots/Update_Screen.jpeg.jpeg" width="200"/> |
  
 </div>
