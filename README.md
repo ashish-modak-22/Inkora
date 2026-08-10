@@ -339,3 +339,9 @@ app/build/outputs/apk/debug/app-debug.apk
 ## 🤝 Contributing
  
 Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**! ❤️
+
+1. **Fork** the repository
+2. Create your feature branch
+```bash
+   git checkout -b feature/AmazingFeature
+```
