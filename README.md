@@ -121,3 +121,72 @@ flowchart TD
 4. **ApiService** (Retrofit interface) defines and executes all network calls to the backend.
 5. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
 <br/>
+
+---
+
+## 📂 Folder Structure
+ 
+```
+Inkora/
+│
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/example/notesapp/
+│   │   │   │   ├── api/                    # Retrofit API service & client instance
+│   │   │   │   │   ├── ApiService.kt
+│   │   │   │   │   └── RetrofitInstance.kt
+│   │   │   │   │
+│   │   │   │   ├── datastore/              # Local secure token storage
+│   │   │   │   │   └── TokenManager.kt
+│   │   │   │   │
+│   │   │   │   ├── model/                  # Data classes / request & response models
+│   │   │   │   │   ├── LoginRequest.kt
+│   │   │   │   │   ├── LoginResponse.kt
+│   │   │   │   │   ├── RegisterRequest.kt
+│   │   │   │   │   ├── RegisterResponse.kt
+│   │   │   │   │   ├── NoteRequest.kt
+│   │   │   │   │   └── NoteResponse.kt
+│   │   │   │   │
+│   │   │   │   ├── repository/             # Repository layer (data abstraction)
+│   │   │   │   │   ├── AuthRepository.kt
+│   │   │   │   │   └── NoteRepository.kt
+│   │   │   │   │
+│   │   │   │   ├── viewmodel/              # ViewModels (MVVM state holders)
+│   │   │   │   │   ├── AuthViewModel.kt
+│   │   │   │   │   └── NoteViewModel.kt
+│   │   │   │   │
+│   │   │   │   ├── ui/                     # Activities grouped by feature
+│   │   │   │   │   ├── login/
+│   │   │   │   │   │   └── LoginActivity.kt
+│   │   │   │   │   ├── register/
+│   │   │   │   │   │   └── RegisterActivity.kt
+│   │   │   │   │   ├── home/
+│   │   │   │   │   │   ├── HomeActivity.kt
+│   │   │   │   │   │   └── NoteAdapter.kt
+│   │   │   │   │   └── addnote/
+│   │   │   │   │       └── AddNoteActivity.kt
+│   │   │   │   │
+│   │   │   │   ├── utils/                  # Constants & network result wrappers
+│   │   │   │   │   ├── Constants.kt
+│   │   │   │   │   └── NetworkResult.kt
+│   │   │   │   │
+│   │   │   │   └── MainActivity.kt
+│   │   │   │
+│   │   │   ├── res/                        # Layouts, drawables, themes, strings
+│   │   │   └── AndroidManifest.xml
+│   │   │
+│   │   ├── test/                           # Unit tests
+│   │   └── androidTest/                    # Instrumented UI tests
+│   │
+│   └── build.gradle.kts                    # App-level Gradle config
+│
+├── gradle/
+│   └── libs.versions.toml                  # Centralized dependency version catalog
+│
+├── build.gradle.kts                        # Project-level Gradle config
+├── settings.gradle.kts
+├── gradlew / gradlew.bat
+├── LICENSE
+└── README.md
+```
