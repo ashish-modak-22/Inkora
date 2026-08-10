@@ -62,3 +62,9 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 - Delete notes with a single tap
 </td>
 <td width="50%" valign="top">
+
+### 🔍 Smart Note Browsing
+- **Pagination** support for large note collections
+- **Search** notes by keyword
+- **Sort** by creation date, title, and more
+- Ascending / descending **ordering**
