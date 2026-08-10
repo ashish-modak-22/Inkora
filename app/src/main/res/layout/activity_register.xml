@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Decorative floating glass blobs, same language as Login -->
+
         <View
             android:id="@+id/glassBlobOne"
             android:layout_width="200dp"
@@ -62,46 +62,46 @@
             app:layout_constraintTop_toTopOf="parent">
 <!--            android:layoutAnimation="@anim/layout_anim_header"-->
 
-            <View
-                android:id="@+id/logoBackdrop"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:alpha="0.9"
-                android:background="@drawable/bg_glass_blob"
-                android:backgroundTint="#FFFFFF"
-                android:elevation="4dp"
-                android:importantForAccessibility="no"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <View-->
+<!--                android:id="@+id/logoBackdrop"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:alpha="0.9"-->
+<!--                android:background="@drawable/bg_glass_blob"-->
+<!--                android:backgroundTint="#FFFFFF"-->
+<!--                android:elevation="4dp"-->
+<!--                android:importantForAccessibility="no"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <!-- App Logo -->
             <ImageView
                 android:id="@+id/imgLogo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_notes"
-                app:tint="@color/primary"
-                app:layout_constraintBottom_toBottomOf="@id/logoBackdrop"
-                app:layout_constraintEnd_toEndOf="@id/logoBackdrop"
-                app:layout_constraintStart_toStartOf="@id/logoBackdrop"
-                app:layout_constraintTop_toTopOf="@id/logoBackdrop" />
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:src="@drawable/stickynote"
+                android:scaleType="fitCenter"
+                android:tint="@null"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.18" />
 
             <!-- App Name -->
             <TextView
                 android:id="@+id/tvAppName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.02"
                 android:text="Notes App"
-                android:textColor="@color/text_primary"
-                android:textSize="24sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/imgLogo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/logoBackdrop" />
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,14 +113,15 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="40dp"
             app:cardBackgroundColor="@color/card_register_solid"
             app:cardCornerRadius="28dp"
             app:cardElevation="10dp"
             app:strokeWidth="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerContentContainer">
+            app:layout_constraintTop_toBottomOf="@id/headerContentContainer"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/registerFormFieldsContainer"
@@ -190,7 +191,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="6dp"
                     android:hint="Email"
                     android:textColorHint="@color/on_register_hint"
                     app:boxBackgroundColor="@color/card_register_light"
@@ -222,7 +223,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="6dp"
                     android:hint="Password"
                     android:textColorHint="@color/on_register_hint"
                     app:boxBackgroundColor="@color/card_register_light"
