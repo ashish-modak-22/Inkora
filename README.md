@@ -198,6 +198,7 @@ Inkora/
 ## 🛠️ Tech Stack
  
 <div align="center">
+ 
 | Category | Technology |
 |---|---|
 | **Language** | ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white) |
