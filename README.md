@@ -318,6 +318,7 @@ app/build/outputs/apk/debug/app-debug.apk
 ```
  
 <br/>
+
 ---
 
 ## 🗺️ Roadmap
@@ -331,4 +332,5 @@ app/build/outputs/apk/debug/app-debug.apk
 - [ ] 🌍 Multi-language support
 
 <br/>
+
 ---
