@@ -13,4 +13,8 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 ![Min SDK](https://img.shields.io/badge/Min%20SDK-24-blue?style=for-the-badge)
 ![Target SDK](https://img.shields.io/badge/Target%20SDK-36-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Apache%202.0-D22128?style=for-the-badge&logo=apache&logoColor=white)
+![Build](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge&logo=githubactions&logoColor=white)
+![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-orange?style=for-the-badge&logo=git&logoColor=white)
+![Last Commit](https://img.shields.io/github/last-commit/ashish-modak-22/Inkora?style=for-the-badge&color=blueviolet)
  
+<br/>
