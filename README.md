@@ -300,3 +300,15 @@ object Constants {
 3. Connect a device or start an emulator.
 4. Click **Run ▶️**.
 **Option 2 — Command Line**
+
+```bash
+# Give execution permission to the Gradle wrapper (Linux/macOS)
+chmod +x gradlew
+ 
+# Build a debug APK
+./gradlew assembleDebug
+ 
+# Install directly to a connected device/emulator
+./gradlew installDebug
+```
+ 
