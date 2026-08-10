@@ -312,3 +312,11 @@ chmod +x gradlew
 ./gradlew installDebug
 ```
  
+The generated APK will be available at:
+```
+app/build/outputs/apk/debug/app-debug.apk
+```
+ 
+<br/>
+
+---
