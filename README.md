@@ -144,6 +144,36 @@ flowchart LR
 
 ---
 
+## 🏗️ Architecture
+ 
+Inkora follows a clean **MVVM (Model–View–ViewModel)** architecture pattern combined with a **Repository layer**, ensuring separation of concerns, testability, and scalability.
+ 
+```mermaid
+flowchart TD
+    A["UI Layer (Activities)"] -->|User Actions| B["ViewModel Layer"]
+    B -->|LiveData Observers| A
+    B --> C["Repository Layer"]
+    C --> D["ApiService (Retrofit)"]
+    D -->|HTTPS / REST| E[("Backend API")]
+    C --> F["TokenManager (DataStore)"]
+    F -.->|JWT Token| D
+ 
+    style A fill:#7F52FF,color:#fff
+    style B fill:#3DDC84,color:#fff
+    style C fill:#FF9800,color:#fff
+    style D fill:#2196F3,color:#fff
+    style E fill:#212121,color:#fff
+    style F fill:#E91E63,color:#fff
+```
+ 
+**Flow explained:**
+1. **UI Layer** (`LoginActivity`, `RegisterActivity`, `HomeActivity`, `AddNoteActivity`) handles user interaction.
+2. **ViewModel Layer** (`AuthViewModel`, `NoteViewModel`) exposes `LiveData` and manages UI-related state.
+3. **Repository Layer** (`AuthRepository`, `NoteRepository`) acts as the single source of truth, abstracting data operations.
+4. **ApiService** (Retrofit interface) defines and executes all network calls to the backend.
+5. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
+<br/>
+
 ## 📂 Folder Structure
  
 ```
