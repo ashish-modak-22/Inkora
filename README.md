@@ -96,3 +96,21 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 ## 🏗️ Architecture
  
 Inkora follows a clean **MVVM (Model–View–ViewModel)** architecture pattern combined with a **Repository layer**, ensuring separation of concerns, testability, and scalability.
+
+```mermaid
+flowchart TD
+    A["UI Layer (Activities)"] -->|User Actions| B["ViewModel Layer"]
+    B -->|LiveData Observers| A
+    B --> C["Repository Layer"]
+    C --> D["ApiService (Retrofit)"]
+    D -->|HTTPS / REST| E[("Backend API")]
+    C --> F["TokenManager (DataStore)"]
+    F -.->|JWT Token| D
+ 
+    style A fill:#7F52FF,color:#fff
+    style B fill:#3DDC84,color:#fff
+    style C fill:#FF9800,color:#fff
+    style D fill:#2196F3,color:#fff
+    style E fill:#212121,color:#fff
+    style F fill:#E91E63,color:#fff
+```
