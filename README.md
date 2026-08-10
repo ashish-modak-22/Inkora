@@ -282,3 +282,13 @@ git clone https://github.com/ashish-modak-22/Inkora.git
 cd Inkora
 ```
  
+### ⚙️ Configure the Backend URL
+ 
+Update the base URL in `app/src/main/java/com/example/notesapp/utils/Constants.kt` to point to your backend server:
+ 
+```kotlin
+object Constants {
+    const val BASE_URL = "http://<your-server-ip>:8000/"
+}
+```
+ 
