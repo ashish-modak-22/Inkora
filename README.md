@@ -345,3 +345,15 @@ Contributions make the open-source community an amazing place to learn, inspire,
 ```bash
    git checkout -b feature/AmazingFeature
 ```
+3. Commit your changes
+```bash
+   git commit -m "Add: AmazingFeature"
+```
+4. Push to the branch
+```bash
+   git push origin feature/AmazingFeature
+```
+5. Open a **Pull Request** 🎉
+<br/>
+
+---
