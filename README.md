@@ -108,27 +108,28 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 ---
 
 
-## 🏗️ Architecture
+## 🧭 App Screens & User Flow
  
-Inkora follows a clean **MVVM (Model–View–ViewModel)** architecture pattern combined with a **Repository layer**, ensuring separation of concerns, testability, and scalability.
+Inkora's navigation is intentionally simple and linear, minimizing friction between "opening the app" and "writing a note."
 
 ```mermaid
-flowchart TD
-    A["UI Layer (Activities)"] -->|User Actions| B["ViewModel Layer"]
-    B -->|LiveData Observers| A
-    B --> C["Repository Layer"]
-    C --> D["ApiService (Retrofit)"]
-    D -->|HTTPS / REST| E[("Backend API")]
-    C --> F["TokenManager (DataStore)"]
-    F -.->|JWT Token| D
+flowchart LR
+    Start(["App Launch"]) --> Login["🔐 LoginActivity"]
+    Login -->|New user| Register["🆕 RegisterActivity"]
+    Register -->|Account created| Login
+    Login -->|Valid credentials| Home["🏠 HomeActivity"]
+    Home -->|Tap +| AddNote["✏️ AddNoteActivity"]
+    AddNote -->|Save| Home
+    Home -->|Tap existing note| AddNote
+    Home -->|Search / Sort / Paginate| Home
  
-    style A fill:#7F52FF,color:#fff
-    style B fill:#3DDC84,color:#fff
-    style C fill:#FF9800,color:#fff
-    style D fill:#2196F3,color:#fff
-    style E fill:#212121,color:#fff
-    style F fill:#E91E63,color:#fff
+    style Start fill:#212121,color:#fff
+    style Login fill:#7F52FF,color:#fff
+    style Register fill:#9C6EFF,color:#fff
+    style Home fill:#3DDC84,color:#fff
+    style AddNote fill:#FF9800,color:#fff
 ```
+
 **Flow explained:**
 1. **UI Layer** (`LoginActivity`, `RegisterActivity`, `HomeActivity`, `AddNoteActivity`) handles user interaction.
 2. **ViewModel Layer** (`AuthViewModel`, `NoteViewModel`) exposes `LiveData` and manages UI-related state.
