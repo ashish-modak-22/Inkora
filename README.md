@@ -49,3 +49,8 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 <table>
 <tr>
 <td width="50%" valign="top">
+
+### 🔐 Secure Authentication
+- User **Registration** & **Login** flows
+- **JWT token-based** session management
+- Encrypted local token persistence via **DataStore**
