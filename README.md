@@ -306,6 +306,7 @@ All network payloads are represented as Kotlin `data class`es and (de)serialized
  
 <details>
 <summary><b>🔐 Authentication Models</b> (click to expand)</summary>
+ 
 ```kotlin
 // Sent to POST /auth/register
 data class RegisterRequest(
@@ -337,6 +338,7 @@ data class LoginResponse(
 </details>
 <details>
 <summary><b>📝 Note Models</b> (click to expand)</summary>
+ 
 ```kotlin
 // Sent to POST /notes and PUT /notes/{note_id}
 data class NoteRequest(
