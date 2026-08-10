@@ -434,6 +434,17 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ---
 
+## 🔒 Security Notes
+ 
+- Passwords are **never stored locally** — only the short-lived **JWT access token** returned after login is persisted, via Jetpack `DataStore` (`TokenManager.kt`).
+- The token is attached as a Bearer credential in the `Authorization` header on every protected request (`/notes/*`).
+- `clearToken()` wipes the stored session on logout, ensuring no stale credentials remain on-device.
+- ⚠️ **Development note:** `android:usesCleartextTraffic="true"` is currently enabled in the manifest to allow HTTP calls to a local backend during development. **Disable this and switch to HTTPS before any production release.**
+  
+<br/>
+
+---
+
 ## 🗺️ Further Improvements
  
 - [ ] 🌙 Dark mode toggle in-app settings
