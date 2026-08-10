@@ -264,3 +264,12 @@ Inkora communicates with a RESTful backend exposing the following endpoints:
 > 🔑 Authenticated routes require an `Authorization` header carrying the JWT bearer token issued at login.
  
 <br/>
+
+## 🚀 Installation & Setup
+ 
+### ✅ Prerequisites
+ 
+- **Android Studio** (Ladybug or newer recommended)
+- **JDK 11+**
+- An Android device / emulator running **API 24 (Android 7.0)** or above
+- A running instance of the **Inkora backend API** (or your own compatible REST server)
