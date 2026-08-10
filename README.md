@@ -357,3 +357,16 @@ Contributions make the open-source community an amazing place to learn, inspire,
 <br/>
 
 ---
+
+
+## 🐛 Reporting Issues
+ 
+Found a bug or have a feature request? [Open an issue](../../issues) and describe:
+- What you expected to happen
+- What actually happened
+- Steps to reproduce (if applicable)
+- Screenshots/logs, if relevant
+<br/>
+
+---
+
