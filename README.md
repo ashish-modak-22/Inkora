@@ -383,5 +383,14 @@ This project is open source and available under the [Apache License 2.0](License
 - [Material Components for Android](https://github.com/material-components/material-components-android)
 - [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
 - [Shields.io](https://shields.io/) — for the crisp badges used in this README
-<br/>
+
 ---
+
+<div align="center">
+### ✍️ *"Every great idea starts with a single note."*
+ 
+**Made with ❤️ and Kotlin by the Inkora Team**
+ 
+⭐ **If you find this project useful, consider giving it a star!** ⭐
+ 
+</div>
