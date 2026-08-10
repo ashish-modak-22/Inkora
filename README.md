@@ -298,6 +298,67 @@ androidTestImplementation("androidx.test.espresso:espresso-core")
  ```
 <br/>
 
+---
+
+## 🧬 Data Models
+ 
+All network payloads are represented as Kotlin `data class`es and (de)serialized automatically via **Gson**. These live under `model/`.
+ 
+<details>
+<summary><b>🔐 Authentication Models</b> (click to expand)</summary>
+```kotlin
+// Sent to POST /auth/register
+data class RegisterRequest(
+    val name: String,
+    val email: String,
+    val password: String
+)
+ 
+// Returned from POST /auth/register
+data class RegisterResponse(
+    val id: Int,
+    val name: String,
+    val email: String
+)
+ 
+// Sent to POST /auth/login
+data class LoginRequest(
+    val email: String,
+    val password: String
+)
+ 
+// Returned from POST /auth/login
+data class LoginResponse(
+    @SerializedName("access_token") val accessToken: String,
+    @SerializedName("token_type")   val tokenType: String
+)
+```
+ 
+</details>
+<details>
+<summary><b>📝 Note Models</b> (click to expand)</summary>
+```kotlin
+// Sent to POST /notes and PUT /notes/{note_id}
+data class NoteRequest(
+    @SerializedName("title")   val title: String,
+    @SerializedName("content") val content: String
+)
+ 
+// Returned from GET /notes/, POST /notes, PUT /notes/{note_id}
+data class NoteResponse(
+    @SerializedName("id")         val id: Int,
+    @SerializedName("title")      val title: String,
+    @SerializedName("content")    val content: String,
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("updated_at") val updatedAt: String
+)
+```
+ 
+</details>
+<br/>
+
+---
+
 ## 🌐 API Overview
  
 Inkora communicates with a RESTful backend exposing the following endpoints:
