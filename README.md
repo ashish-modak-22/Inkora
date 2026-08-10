@@ -43,3 +43,9 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 > 💡 **Why "Inkora"?** — A fusion of *"Ink"* (the timeless act of writing) and *"Aura"* (a personal touch) — representing notes that carry your own creative energy.
  
 <br/>
+
+## ✨ Features
+ 
+<table>
+<tr>
+<td width="50%" valign="top">
