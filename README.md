@@ -190,3 +190,28 @@ Inkora/
 ├── LICENSE
 └── README.md
 ```
+
+<br/>
+
+---
+
+## 🛠️ Tech Stack
+ 
+<div align="center">
+| Category | Technology |
+|---|---|
+| **Language** | ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white) |
+| **Platform** | ![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white) |
+| **Architecture** | MVVM + Repository Pattern |
+| **Networking** | ![Retrofit](https://img.shields.io/badge/Retrofit-48B983?style=flat-square) ![OkHttp](https://img.shields.io/badge/OkHttp-000000?style=flat-square) |
+| **Async / Reactive** | Kotlin Coroutines, LiveData |
+| **Local Storage** | Jetpack DataStore (Preferences) |
+| **UI Toolkit** | Material Components, ConstraintLayout, View Binding |
+| **JSON Parsing** | Gson (via Retrofit Converter) |
+| **Build System** | Gradle (Kotlin DSL) |
+| **Version Control** | Git & GitHub |
+ 
+</div>
+<br/>
+
+---
