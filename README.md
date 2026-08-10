@@ -387,6 +387,7 @@ This project is open source and available under the [Apache License 2.0](License
 ---
 
 <div align="center">
+ 
 ### ✍️ *"Every great idea starts with a single note."*
  
 **Made with ❤️ and Kotlin by the Inkora Team**
