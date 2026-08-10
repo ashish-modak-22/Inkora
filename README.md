@@ -334,3 +334,8 @@ app/build/outputs/apk/debug/app-debug.apk
 <br/>
 
 ---
+
+
+## 🤝 Contributing
+ 
+Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**! ❤️
