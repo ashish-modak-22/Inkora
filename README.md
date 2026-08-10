@@ -390,7 +390,7 @@ This project is open source and available under the [Apache License 2.0](License
  
 ### ✍️ *"Every great idea starts with a single note."*
  
-**Made with ❤️ and Kotlin by the Inkora Team**
+**Made with ❤️ and Kotlin**
  
 ⭐ **If you find this project useful, consider giving it a star!** ⭐
  
