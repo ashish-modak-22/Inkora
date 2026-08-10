@@ -18,3 +18,15 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 ![Last Commit](https://img.shields.io/github/last-commit/ashish-modak-22/Inkora?style=for-the-badge&color=blueviolet)
  
 <br/>
+
+
+**[📥 Download](#-installation--setup)** •
+**[✨ Features](#-features)** •
+**[📸 Screenshots](#-screenshots)** •
+**[🏗️ Architecture](#️-architecture)** •
+**[🛠️ Tech Stack](#️-tech-stack)** •
+**[🚀 Getting Started](#-installation--setup)** •
+**[🤝 Contributing](#-contributing)** •
+**[📄 License](#-license)**
+ 
+</div>
