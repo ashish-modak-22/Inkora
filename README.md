@@ -89,3 +89,10 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
  
 </div>
 <br/>
+
+---
+
+
+## 🏗️ Architecture
+ 
+Inkora follows a clean **MVVM (Model–View–ViewModel)** architecture pattern combined with a **Repository layer**, ensuring separation of concerns, testability, and scalability.
