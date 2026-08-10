@@ -292,3 +292,11 @@ object Constants {
 }
 ```
  
+### ▶️ Build & Run
+ 
+**Option 1 — Android Studio**
+1. Open the project in Android Studio.
+2. Let Gradle sync all dependencies.
+3. Connect a device or start an emulator.
+4. Click **Run ▶️**.
+**Option 2 — Command Line**
