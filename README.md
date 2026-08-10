@@ -375,3 +375,13 @@ Found a bug or have a feature request? [Open an issue](../../issues) and describ
 This project is open source and available under the [Apache License 2.0](License).
 
 ---
+
+
+## 💖 Acknowledgements
+ 
+- [Retrofit](https://square.github.io/retrofit/) — Type-safe HTTP client for Android
+- [Material Components for Android](https://github.com/material-components/material-components-android)
+- [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
+- [Shields.io](https://shields.io/) — for the crisp badges used in this README
+<br/>
+---
