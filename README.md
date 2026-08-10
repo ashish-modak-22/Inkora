@@ -130,12 +130,16 @@ flowchart LR
     style AddNote fill:#FF9800,color:#fff
 ```
 
-**Flow explained:**
-1. **UI Layer** (`LoginActivity`, `RegisterActivity`, `HomeActivity`, `AddNoteActivity`) handles user interaction.
-2. **ViewModel Layer** (`AuthViewModel`, `NoteViewModel`) exposes `LiveData` and manages UI-related state.
-3. **Repository Layer** (`AuthRepository`, `NoteRepository`) acts as the single source of truth, abstracting data operations.
-4. **ApiService** (Retrofit interface) defines and executes all network calls to the backend.
-5. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
+| Screen | Activity Class | Layout File | Purpose |
+|---|---|---|---|
+| **Login** | `LoginActivity.kt` | `activity_login.xml` | App's launcher screen. Authenticates the user and stores the returned JWT via `TokenManager`. |
+| **Register** | `RegisterActivity.kt` | `activity_register.xml` | Collects name, email & password to create a new account via `/auth/register`. |
+| **Home** | `HomeActivity.kt` | `activity_home.xml` | Displays the authenticated user's notes in a `RecyclerView` (`NoteAdapter` + `item_note.xml`), with search/sort/pagination controls. |
+| **Add / Edit Note** | `AddNoteActivity.kt` | `activity_add_note.xml` | Form for creating a new note or editing an existing one, then syncing it to the backend. |
+| **Splash / Root** | `MainActivity.kt` | `activity_main.xml` | Base entry activity used for internal routing/setup. |
+ 
+> 🎨 Inkora is themed on **Material 3 (`Theme.Material3.DayNight.NoActionBar`)**, meaning it automatically adapts to the system's **light/dark mode** out of the box.
+ 
 <br/>
 
 ---
