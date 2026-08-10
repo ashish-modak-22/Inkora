@@ -216,3 +216,7 @@ Inkora/
 <br/>
 
 ---
+
+## 📦 Dependencies
+ 
+Key libraries used in Inkora (see [`app/build.gradle.kts`](app/build.gradle.kts) for the full list):
