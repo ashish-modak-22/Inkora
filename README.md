@@ -114,3 +114,10 @@ flowchart TD
     style E fill:#212121,color:#fff
     style F fill:#E91E63,color:#fff
 ```
+**Flow explained:**
+1. **UI Layer** (`LoginActivity`, `RegisterActivity`, `HomeActivity`, `AddNoteActivity`) handles user interaction.
+2. **ViewModel Layer** (`AuthViewModel`, `NoteViewModel`) exposes `LiveData` and manages UI-related state.
+3. **Repository Layer** (`AuthRepository`, `NoteRepository`) acts as the single source of truth, abstracting data operations.
+4. **ApiService** (Retrofit interface) defines and executes all network calls to the backend.
+5. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
+<br/>
