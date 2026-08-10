@@ -273,3 +273,12 @@ Inkora communicates with a RESTful backend exposing the following endpoints:
 - **JDK 11+**
 - An Android device / emulator running **API 24 (Android 7.0)** or above
 - A running instance of the **Inkora backend API** (or your own compatible REST server)
+
+
+### 📥 Clone the Repository
+ 
+```bash
+git clone https://github.com/ashish-modak-22/Inkora.git
+cd Inkora
+```
+ 
