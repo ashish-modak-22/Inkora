@@ -54,3 +54,11 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 - User **Registration** & **Login** flows
 - **JWT token-based** session management
 - Encrypted local token persistence via **DataStore**
+
+### 📝 Full Note Management (CRUD)
+- Create new notes instantly
+- View all notes in a clean, scrollable list
+- Edit & update existing notes on the fly
+- Delete notes with a single tap
+</td>
+<td width="50%" valign="top">
