@@ -370,3 +370,8 @@ Found a bug or have a feature request? [Open an issue](../../issues) and describ
 
 ---
 
+## 📄 License
+ 
+This project is open source and available under the [Apache License 2.0](License).
+
+---
