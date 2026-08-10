@@ -445,6 +445,31 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ---
 
+## 🧪 Testing
+ 
+Inkora ships with the standard Android testing scaffolding, ready to be extended:
+ 
+| Type | Location | Framework |
+|---|---|---|
+| **Unit Tests** | `app/src/test/java/.../ExampleUnitTest.kt` | JUnit 4 |
+| **Instrumented Tests** | `app/src/androidTest/java/.../ExampleInstrumentedTest.kt` | AndroidX Test + Espresso |
+ 
+Run tests via Gradle:
+ 
+```bash
+# Run local unit tests
+./gradlew test
+ 
+# Run instrumented tests on a connected device/emulator
+./gradlew connectedAndroidTest
+```
+ 
+> 🧩 **Contributor tip:** Repository and ViewModel classes are prime candidates for unit tests using `MockWebServer` / `Mockito` to simulate API responses — contributions here are especially welcome!
+ 
+<br/>
+
+---
+
 ## 🗺️ Further Improvements
  
 - [ ] 🌙 Dark mode toggle in-app settings
