@@ -220,3 +220,14 @@ Inkora/
 ## 📦 Dependencies
  
 Key libraries used in Inkora (see [`app/build.gradle.kts`](app/build.gradle.kts) for the full list):
+
+```kotlin
+// Networking
+implementation("com.squareup.retrofit2:retrofit:2.11.0")
+implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+ 
+// Architecture Components (ViewModel + LiveData)
+implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
+implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
+ ```
