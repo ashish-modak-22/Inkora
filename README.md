@@ -19,15 +19,28 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
  
 <br/>
 
+## 📚 Table of Contents
+ 
+- [About The Project](#-about-the-project)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [App Screens & User Flow](#-app-screens--user-flow)
+- [Architecture](#️-architecture)
+- [Folder Structure](#-folder-structure)
+- [Tech Stack](#️-tech-stack)
+- [Dependencies](#-dependencies)
+- [Data Models](#-data-models)
+- [API Overview](#-api-overview)
+- [Installation & Setup](#-installation--setup)
+- [Testing](#-testing)
+- [Project Status](#-project-status)
+- [Roadmap](#️-roadmap)
+- [FAQ](#-faq)
+- [Contributing](#-contributing)
+- [Reporting Issues](#-reporting-issues)
+- [License](#-license)
+- [Acknowledgements](#-acknowledgements)
 
-**[📥 Download](#-installation--setup)** •
-**[✨ Features](#-features)** •
-**[📸 Screenshots](#-screenshots)** •
-**[🏗️ Architecture](#️-architecture)** •
-**[🛠️ Tech Stack](#️-tech-stack)** •
-**[🚀 Getting Started](#-installation--setup)** •
-**[🤝 Contributing](#-contributing)** •
-**[📄 License](#-license)**
  
 </div>
 <br/>
