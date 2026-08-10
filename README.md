@@ -230,4 +230,19 @@ implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 // Architecture Components (ViewModel + LiveData)
 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
 implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
+
+// Secure local storage for JWT token
+implementation("androidx.datastore:datastore-preferences:1.1.7")
+ 
+// Core Android & UI
+implementation("androidx.core:core-ktx:1.12.0")
+implementation("androidx.appcompat:appcompat")
+implementation("androidx.constraintlayout:constraintlayout")
+implementation("com.google.android.material:material:1.11.0")
+implementation("androidx.activity:activity-ktx")
+ 
+// Testing
+testImplementation("junit:junit")
+androidTestImplementation("androidx.test.ext:junit")
+androidTestImplementation("androidx.test.espresso:espresso-core")
  ```
