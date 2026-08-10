@@ -57,10 +57,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
-            android:layoutAnimation="@anim/layout_anim_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+<!--            android:layoutAnimation="@anim/layout_anim_header"-->
 
             <View
                 android:id="@+id/logoBackdrop"
@@ -126,8 +126,8 @@
                 android:id="@+id/registerFormFieldsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutAnimation="@anim/layout_anim_form_fields"
                 android:padding="26dp">
+<!--                android:layoutAnimation="@anim/layout_anim_form_fields"-->
 
                 <!-- Heading -->
                 <TextView
