@@ -68,3 +68,13 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 - **Search** notes by keyword
 - **Sort** by creation date, title, and more
 - Ascending / descending **ordering**
+
+### ⚡ Performance & UX
+- Reactive UI powered by **LiveData** & **ViewModel**
+- Smooth network handling with **Retrofit + OkHttp**
+- Clean, card-based **Material Design** interface
+- View Binding for type-safe UI access
+</td>
+</tr>
+</table>
+<br/>
