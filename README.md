@@ -39,3 +39,7 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 **Inkora** is a modern, minimalist Android notes application designed to help you capture ideas the moment they strike. Built entirely in **Kotlin** with a clean **MVVM architecture**, Inkora communicates with a RESTful backend to keep your notes securely synced and accessible from anywhere.
 
 Whether you're jotting down a quick reminder, drafting an idea, or organizing your day, Inkora combines a distraction-free interface with robust, secure cloud-backed storage — so your notes are never just stuck on one device.
+
+> 💡 **Why "Inkora"?** — A fusion of *"Ink"* (the timeless act of writing) and *"Aura"* (a personal touch) — representing notes that carry your own creative energy.
+ 
+<br/>
