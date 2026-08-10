@@ -19,6 +19,9 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
  
 <br/>
 
+</div>
+
+
 ## 📚 Table of Contents
  
 - [About The Project](#-about-the-project)
@@ -42,7 +45,6 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 - [Acknowledgements](#-acknowledgements)
 
  
-</div>
 <br/>
 
 ---
