@@ -246,3 +246,21 @@ testImplementation("junit:junit")
 androidTestImplementation("androidx.test.ext:junit")
 androidTestImplementation("androidx.test.espresso:espresso-core")
  ```
+<br/>
+
+## 🌐 API Overview
+ 
+Inkora communicates with a RESTful backend exposing the following endpoints:
+ 
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|:---:|
+| `POST` | `/auth/register` | Register a new user account | ❌ |
+| `POST` | `/auth/login` | Authenticate & receive JWT token | ❌ |
+| `GET` | `/notes/` | Fetch notes (supports pagination, search & sort) | ✅ |
+| `POST` | `/notes` | Create a new note | ✅ |
+| `PUT` | `/notes/{note_id}` | Update an existing note | ✅ |
+| `DELETE` | `/notes/{note_id}` | Delete a note | ✅ |
+ 
+> 🔑 Authenticated routes require an `Authorization` header carrying the JWT bearer token issued at login.
+ 
+<br/>
