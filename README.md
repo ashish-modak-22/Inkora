@@ -33,3 +33,4 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 <br/>
 
 ---
+
