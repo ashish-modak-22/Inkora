@@ -321,13 +321,13 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Further Improvements
  
 - [ ] 🌙 Dark mode toggle in-app settings
 - [ ] 🏷️ Note tagging / categorization
 - [ ] 📎 Attachment support (images, files)
 - [ ] 🔔 Reminders & notifications
-- [ ] ☁️ Offline-first sync with local caching (Room)
+- [ ] ☁️ Offline-first sync with local caching (Room/SQLite)
 - [ ] 🔒 Biometric app-lock
 - [ ] 🌍 Multi-language support
 
