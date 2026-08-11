@@ -14,6 +14,7 @@ import com.example.notesapp.model.NoteResponse
 import com.example.notesapp.ui.login.LoginActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import androidx.core.view.GravityCompat
 
 class HomeActivity : AppCompatActivity() {
 
@@ -95,6 +96,10 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
                 finish()
             }
+        }
+
+        binding.accountButton.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
