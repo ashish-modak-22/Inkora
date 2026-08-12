@@ -40,10 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Animated app title: wrapped in its own container so a pulse/shimmer
-             animation (see res/anim/title_pulse.xml) can be started on it from
-             code, e.g. titleContainer.startAnimation(AnimationUtils.loadAnimation(
-             this, R.anim.title_pulse)) -->
         <LinearLayout
             android:id="@+id/titleContainer"
             android:layout_width="wrap_content"
@@ -96,9 +92,6 @@
             app:layout_constraintEnd_toStartOf="@id/accountButton"
             app:layout_constraintTop_toTopOf="@id/accountButton" />
 
-        <!-- Round account/profile button — UI + id only, click logic to be wired later.
-             Intended use: show the current user's avatar/initial here, and open an
-             account menu or profile screen on click. -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/accountButton"
             android:layout_width="44dp"
@@ -208,16 +201,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchCard" />
 
-    <!-- Notes grid — staggered 2-column, Keep/Notion-style layout.
-         android:layoutAnimation plays note_item_animation on the initial bind of
-         each visible item. For notes animating into place when you CREATE or
-         UPDATE a note (i.e. items moving/inserting after the RecyclerView is
-         already showing), set a RecyclerView.ItemAnimator in code, e.g.:
-             rvNotes.itemAnimator = DefaultItemAnimator().apply {
-                 addDuration = 320; changeDuration = 320; moveDuration = 320
-             }
-         That's Kotlin-side logic, so it isn't included here per your request —
-         this layout only wires up the ids and the initial-load animation. -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNotes"
         android:layout_width="0dp"
