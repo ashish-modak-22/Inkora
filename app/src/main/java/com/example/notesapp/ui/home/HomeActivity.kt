@@ -15,6 +15,7 @@ import com.example.notesapp.ui.login.LoginActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import androidx.core.view.GravityCompat
+import com.example.notesapp.R
 
 class HomeActivity : AppCompatActivity() {
 
@@ -88,13 +89,16 @@ class HomeActivity : AppCompatActivity() {
                 }.show()
         }
 
-        binding.logoutButton.setOnClickListener {
+        binding.navigationBar.navView.setNavigationItemSelectedListener { item ->
 
-            lifecycleScope.launch {
-                tokenManager.clearToken()
+            when (item.itemId) {
 
-                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-                finish()
+                R.id.navLogout -> {
+                    logoutUser()
+                    true
+                }
+
+                else -> false
             }
         }
 
@@ -109,6 +113,15 @@ class HomeActivity : AppCompatActivity() {
         loadNotes()
     }
 
+
+    private fun logoutUser(){
+
+        lifecycleScope.launch {
+            tokenManager.clearToken()
+            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+            finish()
+        }
+    }
 
     private fun loadNotes(search : String? = null) {
 
