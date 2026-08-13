@@ -117,6 +117,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
+    // The logoutUser function will clear the token from the current datastore and hence the user will get logged out
     private fun logoutUser(){
 
         lifecycleScope.launch {
