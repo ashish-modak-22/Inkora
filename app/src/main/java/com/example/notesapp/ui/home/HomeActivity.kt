@@ -104,6 +104,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
+        // This code block will trigger the account button and open the side navigation drawer
         binding.accountButton.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
