@@ -170,6 +170,10 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    /* The follwing function will first check the token for a specific logged in user and if it is found non-empty
+       then it will delete the specific note with a particular note id from the database
+    */ 
     private fun deleteNote(noteId: Int) {
          lifecycleScope.launch {
              try {
