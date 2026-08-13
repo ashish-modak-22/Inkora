@@ -46,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter
 
+        // Functionalty of the Floating action button that will create a new note
         binding.fabAddNote.setOnClickListener {
 
             intent = Intent(this, AddNoteActivity::class.java)
