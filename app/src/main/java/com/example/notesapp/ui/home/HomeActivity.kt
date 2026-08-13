@@ -110,6 +110,8 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    // This function will run and load the existing notes everytime the user returns inside this activity
     override fun onResume() {
         super.onResume()
 
