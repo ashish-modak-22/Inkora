@@ -127,6 +127,11 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    /*
+      The follwing function will first check for the token of the currently logged in user; if it is not null then it will load
+      the corresponding notes of the specific user with proper exception handling
+    */
     private fun loadNotes(search : String? = null) {
 
         lifecycleScope.launch{
