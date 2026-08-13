@@ -89,6 +89,7 @@ class HomeActivity : AppCompatActivity() {
                 }.show()
         }
 
+        // Adding functionality to the logout option inside navigation drawer
         binding.navigationBar.navView.setNavigationItemSelectedListener { item ->
 
             when (item.itemId) {
