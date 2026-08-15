@@ -46,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter
 
+        // Functionalty of the Floating action button that will create a new note
         binding.fabAddNote.setOnClickListener {
 
             intent = Intent(this, AddNoteActivity::class.java)
@@ -89,6 +90,7 @@ class HomeActivity : AppCompatActivity() {
                 }.show()
         }
 
+        // Adding functionality to the logout option inside navigation drawer
         binding.navigationBar.navView.setNavigationItemSelectedListener { item ->
 
             when (item.itemId) {
@@ -102,11 +104,14 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
+        // This code block will trigger the account button and open the side navigation drawer
         binding.accountButton.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
+
+    // This function will run and load the existing notes everytime the user returns inside this activity
     override fun onResume() {
         super.onResume()
 
@@ -114,6 +119,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
+    // The logoutUser function will clear the token from the current datastore and hence the user will get logged out
     private fun logoutUser(){
 
         lifecycleScope.launch {
@@ -123,6 +129,11 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    /*
+      The follwing function will first check for the token of the currently logged in user; if it is not null then it will load
+      the corresponding notes of the specific user with proper exception handling
+    */
     private fun loadNotes(search : String? = null) {
 
         lifecycleScope.launch{
@@ -161,6 +172,10 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    /* The follwing function will first check the token for a specific logged in user and if it is found non-empty
+       then it will delete the specific note with a particular note id from the database
+    */ 
     private fun deleteNote(noteId: Int) {
          lifecycleScope.launch {
              try {
