@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.databinding.ActivityHomeBinding
 import android.content.Intent
+import android.widget.TextView
 import com.example.notesapp.ui.addnote.AddNoteActivity
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
         binding.rvNotes.layoutManager = LinearLayoutManager(this)
         binding.rvNotes.adapter = noteAdapter
 
-        // Functionalty of the Floating action button that will create a new note
+        // Functionality of the Floating action button that will create a new note
         binding.fabAddNote.setOnClickListener {
 
             intent = Intent(this, AddNoteActivity::class.java)
@@ -103,6 +104,17 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
+        // Find the header view from navigation view
+        val headerView = binding.navigationBar.navView.getHeaderView(0)
+
+        val navHeaderText = headerView.findViewById<TextView>(R.id.navHeaderText)
+
+        val user_id = intent.getStringExtra("user_id")
+
+        navHeaderText.text = user_id
+
 
         // This code block will trigger the account button and open the side navigation drawer
         binding.accountButton.setOnClickListener {

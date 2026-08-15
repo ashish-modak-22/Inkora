@@ -56,11 +56,12 @@ class LoginActivity : AppCompatActivity() {
 
             if(email.isEmpty() || password.isEmpty()) {
 
-                Toast.makeText(this, "Please fill al fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             loginUser(email, password)
+
         }
     }
 
@@ -77,7 +78,14 @@ class LoginActivity : AppCompatActivity() {
                     if(loginResponse != null){
                         tokenManager.saveToken(loginResponse.accessToken)
                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                        val intent = Intent(
+                            this@LoginActivity,
+                            HomeActivity::class.java
+                        )
+
+                        intent.putExtra("user_id", email)
+
+                        startActivity(intent)
                         finish()
                     }
                 }
