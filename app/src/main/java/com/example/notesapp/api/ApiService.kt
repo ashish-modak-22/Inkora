@@ -84,4 +84,6 @@ interface ApiService {
         noteId: Int
     ): Response<Unit>
 
+    @DELETE("auth/me")
+    suspend fun deleteAccount(): Response<Unit>
 }
