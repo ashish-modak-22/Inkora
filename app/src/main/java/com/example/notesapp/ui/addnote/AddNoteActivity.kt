@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.notesapp.api.RetrofitInstance
 import com.example.notesapp.datastore.TokenManager
 import com.example.notesapp.databinding.ActivityAddNoteBinding
-import com.example.notesapp.model.NoteRequest
+import com.example.notesapp.repository.NoteRepository
+import com.example.notesapp.repository.UnauthorizedException
+import com.example.notesapp.ui.login.LoginActivity
+import android.content.Intent
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -18,6 +20,7 @@ class AddNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var tokenManager: TokenManager
+    private lateinit var noteRepository: NoteRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,7 @@ class AddNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tokenManager = TokenManager(this)
+        noteRepository = NoteRepository(this)
 
 
         // Read the data from Intent
@@ -51,12 +55,12 @@ class AddNoteActivity : AppCompatActivity() {
                 return@setOnClickListener
 
             }
-           if(isEditMode) {
-               updateNote(noteId, title, content)
-           }
+            if(isEditMode) {
+                updateNote(noteId, title, content)
+            }
             else {
                 createNote(title, content)
-           }
+            }
         }
     }
 
@@ -73,18 +77,17 @@ class AddNoteActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                val response = RetrofitInstance.api.createNote(
-                    "Bearer $token",
-                    NoteRequest(title=title, content=content)
-                )
+                // Saved to SQLite immediately, and pushed to the server right away if we're
+                // online -- if we're offline it just stays queued and syncs next time we are.
+                noteRepository.createNote(token, title, content)
 
-                if(response.isSuccessful){
-                    Toast.makeText(this@AddNoteActivity, "Note Created", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                else{
-                    Toast.makeText(this@AddNoteActivity, "Failed to create note", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this@AddNoteActivity, "Note Created", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            catch (e: UnauthorizedException) {
+                tokenManager.clearToken()
+                startActivity(Intent(this@AddNoteActivity, LoginActivity::class.java))
+                finish()
             }
             catch (e: Exception) {
                 Toast.makeText(this@AddNoteActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
@@ -101,15 +104,16 @@ class AddNoteActivity : AppCompatActivity() {
                     finish()
                     return@launch
                 }
-                val response = RetrofitInstance.api.updateNote("Bearer $token", noteId, NoteRequest(title=title, content=content))
 
-                if(response.isSuccessful){
-                    Toast.makeText(this@AddNoteActivity, "Note Updated", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                else {
-                    Toast.makeText(this@AddNoteActivity, "Failed to update note", Toast.LENGTH_SHORT).show()
-                }
+                noteRepository.updateNote(token, noteId, title, content)
+
+                Toast.makeText(this@AddNoteActivity, "Note Updated", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            catch (e: UnauthorizedException) {
+                tokenManager.clearToken()
+                startActivity(Intent(this@AddNoteActivity, LoginActivity::class.java))
+                finish()
             }
             catch (e: Exception){
                 Toast.makeText(this@AddNoteActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
