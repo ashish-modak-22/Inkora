@@ -9,9 +9,9 @@ import android.widget.TextView
 import com.example.notesapp.ui.addnote.AddNoteActivity
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.notesapp.api.RetrofitInstance
 import com.example.notesapp.datastore.TokenManager
-import com.example.notesapp.model.NoteResponse
+import com.example.notesapp.repository.NoteRepository
+import com.example.notesapp.repository.UnauthorizedException
 import com.example.notesapp.ui.login.LoginActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var tokenManager: TokenManager
+    private lateinit var noteRepository: NoteRepository
     private lateinit var noteAdapter: NoteAdapter
     private var currentSortBy = "created_at"
     private var currentOrder = "desc"
@@ -33,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tokenManager = TokenManager(this)
+        noteRepository = NoteRepository(this)
         noteAdapter = NoteAdapter(emptyList(), onNoteClick = { note ->
             val intent = Intent(this, AddNoteActivity::class.java)
             intent.putExtra("note_id", note.id)
@@ -143,8 +145,13 @@ class HomeActivity : AppCompatActivity() {
 
 
     /*
-      The follwing function will first check for the token of the currently logged in user; if it is not null then it will load
-      the corresponding notes of the specific user with proper exception handling
+      The following function will first check for the token of the currently logged in user; if it is not null then it will load
+      the corresponding notes of the specific user with proper exception handling.
+
+      Notes are read from the local SQLite cache (via NoteRepository), which is refreshed from
+      the server first whenever there's a connection -- so this works offline too, and any notes
+      created/edited/deleted while offline get pushed to the server automatically as soon as
+      we're back online.
     */
     private fun loadNotes(search : String? = null) {
 
@@ -160,23 +167,13 @@ class HomeActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                val response = RetrofitInstance.api.getAllNotes("Bearer $token", search=search, sortBy=currentSortBy, order=currentOrder)
-
-                if(response.isSuccessful) {
-                    val notes = response.body()?:emptyList()
-                    noteAdapter.updateNotes(notes)
-                }
-                else {
-                    if(response.code() == 401){
-                        tokenManager.clearToken()
-                        startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-                        finish()
-                    }
-                    else{
-                        Toast.makeText(this@HomeActivity,"Failed to load notes",Toast.LENGTH_SHORT).show()
-
-                    }
-                }
+                val notes = noteRepository.getNotes(token, search=search, sortBy=currentSortBy, order=currentOrder)
+                noteAdapter.updateNotes(notes)
+            }
+            catch (e: UnauthorizedException) {
+                tokenManager.clearToken()
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finish()
             }
             catch (e: Exception){
                 Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
@@ -185,30 +182,31 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    /* The follwing function will first check the token for a specific logged in user and if it is found non-empty
-       then it will delete the specific note with a particular note id from the database
-    */ 
+    /* The following function will first check the token for a specific logged in user and if it is found non-empty
+       then it will delete the specific note with a particular note id. The deleteNote is applied to the local
+       cache immediately (so the item disappears from the list right away even offline) and pushed to the
+       server right away if we're online.
+    */
     private fun deleteNote(noteId: Int) {
-         lifecycleScope.launch {
-             try {
-                 val token = tokenManager.getToken().first()
-                 if(token == null){
-                     return@launch
-                 }
+        lifecycleScope.launch {
+            try {
+                val token = tokenManager.getToken().first()
+                if(token == null){
+                    return@launch
+                }
 
-                 val response = RetrofitInstance.api.deleteNote("Bearer $token", noteId)
-
-                 if(response.isSuccessful){
-                     Toast.makeText(this@HomeActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
-                     loadNotes()
-                 }
-                 else {
-                     Toast.makeText(this@HomeActivity, "Failed to delete note", Toast.LENGTH_SHORT).show()
-                 }
-             }
-             catch (e: Exception){
-                 Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
-             }
-         }
+                noteRepository.deleteNote(token, noteId)
+                Toast.makeText(this@HomeActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
+                loadNotes()
+            }
+            catch (e: UnauthorizedException) {
+                tokenManager.clearToken()
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finish()
+            }
+            catch (e: Exception){
+                Toast.makeText(this@HomeActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
