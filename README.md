@@ -4,7 +4,7 @@
  
 ### *Ink your thoughts. Anywhere. Anytime.*
  
-A sleek, secure, and lightning-fast **native Android note-taking app** built with Kotlin — backed by a JWT-authenticated REST API for seamless cloud sync across devices.
+A sleek, secure, and lightning-fast **native Android note-taking app** built with Kotlin — powered by a local **SQLite database** for offline-first note access and a JWT-authenticated REST API for automatic cloud synchronization with a **Render-hosted PostgreSQL database**.
 
 <br/>
 
@@ -49,9 +49,9 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 
 ## 📖 About The Project
  
-**Inkora** is a modern, minimalist Android notes application designed to help you capture ideas the moment they strike. Built entirely in **Kotlin** with a clean **MVVM architecture**, Inkora communicates with a RESTful backend to keep your notes securely synced and accessible from anywhere.
+**Inkora** is a modern, minimalist Android notes application designed to help you capture ideas the moment they strike. Built entirely in **Kotlin** with a clean **MVVM architecture**, Inkora uses a local **SQLite database** as its offline data source and automatically synchronizes note changes with a JWT-authenticated RESTful backend backed by **PostgreSQL on Render**.
 
-Whether you're jotting down a quick reminder, drafting an idea, or organizing your day, Inkora combines a distraction-free interface with robust, secure cloud-backed storage — so your notes are never just stuck on one device.
+Whether you're jotting down a quick reminder, drafting an idea, or organizing your day, Inkora combines a distraction-free interface with robust local storage and secure cloud-backed synchronization — so your notes remain available even without an internet connection and can be synced to the cloud when connectivity is available.
 
 > 💡 **Why "Inkora"?** — A fusion of *"Ink"* (the timeless act of writing) and *"Aura"* (a personal touch) — representing notes that carry your own creative energy.
  
@@ -73,6 +73,18 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 - View all notes in a clean, scrollable list
 - Edit & update existing notes on the fly
 - Delete notes with a single tap
+
+### 💾 Offline-First Local Storage
+- Notes are stored locally in a **SQLite database**
+- Read, create, update, and delete notes without depending on network availability
+- Local data provides a fast and responsive note-taking experience
+- Local changes are retained until they can be synchronized with the backend
+
+### 🔄 Automatic Cloud Sync
+- Automatically synchronizes local note data with the backend
+- Syncs changes between the local SQLite database and the **Render-hosted PostgreSQL** database
+- Uses the authenticated REST API for secure synchronization
+- Keeps cloud data available across devices after successful synchronization
 </td>
 <td width="50%" valign="top">
 
@@ -151,17 +163,23 @@ flowchart TD
     A["UI Layer (Activities)"] -->|User Actions| B["ViewModel Layer"]
     B -->|LiveData Observers| A
     B --> C["Repository Layer"]
-    C --> D["ApiService (Retrofit)"]
-    D -->|HTTPS / REST| E[("Backend API")]
-    C --> F["TokenManager (DataStore)"]
-    F -.->|JWT Token| D
- 
+    C --> D[("SQLite Local Database")]
+    C --> E["Sync Manager"]
+    E --> F["ApiService (Retrofit)"]
+    F -->|REST + JWT| G[("Render Backend API")]
+    G --> H[("PostgreSQL")]
+    C --> I["TokenManager (DataStore)"]
+    I -.->|JWT Token| F
+
     style A fill:#7F52FF,color:#fff
     style B fill:#3DDC84,color:#fff
     style C fill:#FF9800,color:#fff
-    style D fill:#2196F3,color:#fff
-    style E fill:#212121,color:#fff
-    style F fill:#E91E63,color:#fff
+    style D fill:#795548,color:#fff
+    style E fill:#FF9800,color:#fff
+    style F fill:#2196F3,color:#fff
+    style G fill:#212121,color:#fff
+    style H fill:#336791,color:#fff
+    style I fill:#E91E63,color:#fff
 ```
  
 **Flow explained:**
@@ -169,7 +187,32 @@ flowchart TD
 2. **ViewModel Layer** (`AuthViewModel`, `NoteViewModel`) exposes `LiveData` and manages UI-related state.
 3. **Repository Layer** (`AuthRepository`, `NoteRepository`) acts as the single source of truth, abstracting data operations.
 4. **ApiService** (Retrofit interface) defines and executes all network calls to the backend.
-5. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
+5. **Local SQLite Database** stores notes on-device so the app can continue working offline.
+6. **Sync Manager** coordinates synchronization between the local SQLite data and the remote backend.
+7. **TokenManager** securely stores and retrieves the JWT token using Jetpack **DataStore**.
+
+### 🔄 Offline-First Data Flow
+
+```mermaid
+flowchart LR
+    UI["UI / ViewModel"] --> R["Repository"]
+    R --> DB[("SQLite
+Local Database")]
+    R --> S["Sync Manager"]
+    S --> API["Retrofit / REST API"]
+    API --> BE["Render Backend"]
+    BE --> PG[("PostgreSQL")]
+
+    DB -. "Local reads/writes" .-> R
+    S -. "Upload/download changes" .-> DB
+```
+
+**How synchronization works:**
+1. Notes are first handled through the local **SQLite database**, allowing the app to remain usable offline.
+2. The Repository coordinates local data operations and network synchronization.
+3. When synchronization is possible, local changes are sent to the backend through the authenticated REST API.
+4. The backend persists the synchronized note data in **PostgreSQL hosted on Render**.
+5. Remote note data can be synchronized back to the local SQLite database so the local cache stays up to date.
 <br/>
 
 ## 📂 Folder Structure
@@ -187,6 +230,10 @@ Inkora/
 │   │   │   │   │
 │   │   │   │   ├── datastore/              # Local secure token storage
 │   │   │   │   │   └── TokenManager.kt
+│   │   │   │   │
+│   │   │   │   ├── database/                # Local SQLite database & persistence layer
+│   │   │   │   │
+│   │   │   │   ├── sync/                    # Local ↔ remote synchronization logic
 │   │   │   │   │
 │   │   │   │   ├── model/                  # Data classes / request & response models
 │   │   │   │   │   ├── LoginRequest.kt
@@ -254,7 +301,9 @@ Inkora/
 | **Architecture** | MVVM + Repository Pattern |
 | **Networking** | ![Retrofit](https://img.shields.io/badge/Retrofit-48B983?style=flat-square) ![OkHttp](https://img.shields.io/badge/OkHttp-000000?style=flat-square) |
 | **Async / Reactive** | Kotlin Coroutines, LiveData |
-| **Local Storage** | Jetpack DataStore (Preferences) |
+| **Local Storage** | SQLite + Jetpack DataStore (Preferences) |
+| **Cloud Database** | PostgreSQL (Render) |
+| **Sync Strategy** | Offline-first local storage + automatic cloud synchronization |
 | **UI Toolkit** | Material Components, ConstraintLayout, View Binding |
 | **JSON Parsing** | Gson (via Retrofit Converter) |
 | **Build System** | Gradle (Kotlin DSL) |
@@ -281,6 +330,9 @@ implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
 
 // Secure local storage for JWT token
 implementation("androidx.datastore:datastore-preferences:1.1.7")
+
+// Local SQLite database
+// Uses Android's built-in SQLite APIs; no Room dependency is required.
  
 // Core Android & UI
 implementation("androidx.core:core-ktx:1.12.0")
@@ -300,7 +352,7 @@ androidTestImplementation("androidx.test.espresso:espresso-core")
 
 ## 🧬 Data Models
  
-All network payloads are represented as Kotlin `data class`es and (de)serialized automatically via **Gson**. These live under `model/`.
+All network payloads are represented as Kotlin `data class`es and (de)serialized automatically via **Gson**. These live under `model/`. Notes are additionally persisted locally using **SQLite** so the app can operate offline and synchronize with the remote backend when possible.
  
 <details>
 <summary><b>🔐 Authentication Models</b> (click to expand)</summary>
@@ -437,8 +489,27 @@ app/build/outputs/apk/debug/app-debug.apk
 - Passwords are **never stored locally** — only the short-lived **JWT access token** returned after login is persisted, via Jetpack `DataStore` (`TokenManager.kt`).
 - The token is attached as a Bearer credential in the `Authorization` header on every protected request (`/notes/*`).
 - `clearToken()` wipes the stored session on logout, ensuring no stale credentials remain on-device.
+- Note content is persisted locally in the app's **SQLite database** to support offline usage.
+- Local SQLite storage and remote PostgreSQL storage are synchronized through the authenticated backend API.
 - ⚠️ **Development note:** `android:usesCleartextTraffic="true"` is currently enabled in the manifest to allow HTTP calls to a local backend during development. **Disable this and switch to HTTPS before any production release.**
   
+<br/>
+
+---
+
+## 🔄 Offline & Sync Behavior
+
+Inkora follows an **offline-first** approach for notes:
+
+| Situation | App Behavior |
+|---|---|
+| **Online** | Notes are read/written locally and synchronized with the remote backend |
+| **Offline** | Notes remain available through the local SQLite database |
+| **Connection restored** | Pending local changes can be synchronized with the backend |
+| **Remote data available** | Synchronized data is stored locally so it remains accessible offline |
+
+The remote backend uses **PostgreSQL hosted on Render** as the cloud data store, while SQLite acts as the on-device data store.
+
 <br/>
 
 ---
@@ -474,7 +545,7 @@ Run tests via Gradle:
 - [ ] 🏷️ Note tagging / categorization
 - [ ] 📎 Attachment support (images, files)
 - [ ] 🔔 Reminders & notifications
-- [ ] ☁️ Offline-first sync with local caching (Room/SQLite)
+- [x] ☁️ Offline-first sync with local SQLite storage and automatic cloud synchronization
 - [ ] 🔒 Biometric app-lock
 - [ ] 🌍 Multi-language support
 
