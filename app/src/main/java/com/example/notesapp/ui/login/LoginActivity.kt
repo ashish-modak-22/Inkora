@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notesapp.databinding.ActivityLoginBinding
 import android.content.Intent
+import android.view.View
 import com.example.notesapp.ui.register.RegisterActivity
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -61,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginUser(email, password)
+            setLoading(true)
 
         }
     }
@@ -106,6 +108,21 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+
+        binding.loginButton.isEnabled = !isLoading
+
+        if(isLoading) {
+            binding.loginButton.visibility = View.GONE
+            binding.loginProgressBar.visibility = View.VISIBLE
+        }
+
+        else{
+            binding.loginButton.visibility = View.VISIBLE
+            binding.loginProgressBar.visibility = View.GONE
         }
     }
 }
