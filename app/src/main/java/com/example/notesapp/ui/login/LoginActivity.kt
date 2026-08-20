@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginUser(email, password)
-            setLoading(true)
+//            setLoading(true)
 
         }
     }
@@ -74,6 +74,8 @@ class LoginActivity : AppCompatActivity() {
                 val response = RetrofitInstance.api.loginUser(email, password)
 
                 if(response.isSuccessful){
+
+                    setLoading(true)
 
                     val loginResponse = response.body()
 
