@@ -70,12 +70,12 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         lifecycleScope.launch {
 
+            setLoading(true)
+
             try {
                 val response = RetrofitInstance.api.loginUser(email, password)
 
                 if(response.isSuccessful){
-
-                    setLoading(true)
 
                     val loginResponse = response.body()
 
@@ -109,6 +109,10 @@ class LoginActivity : AppCompatActivity() {
                     e.localizedMessage,
                     Toast.LENGTH_LONG
                 ).show()
+            }
+
+            finally {
+                setLoading(false)
             }
         }
     }
