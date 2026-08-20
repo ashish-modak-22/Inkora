@@ -256,9 +256,8 @@
                 <!-- Loading indicator over the button -->
                 <ProgressBar
                     android:id="@+id/loginProgressBar"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:indeterminateTint="@color/card_solid"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/loginButton"
                     app:layout_constraintEnd_toEndOf="@id/loginButton"
