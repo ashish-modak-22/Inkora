@@ -49,7 +49,7 @@ A sleek, secure, and lightning-fast **native Android note-taking app** built wit
 
 ## 📖 About The Project
  
-**Inkora** is a modern, minimalist Android notes application designed to help you capture ideas the moment they strike. Built entirely in **Kotlin** with a clean **MVVM architecture**, Inkora uses a local **SQLite database** as its offline data source and automatically synchronizes note changes with a JWT-authenticated RESTful backend backed by **PostgreSQL on Render**.
+`Inkora` is a modern, minimalist Android notes application designed to help you capture ideas the moment they strike. Built entirely in `Kotlin` with a clean `MVVM architecture`, Inkora uses a `local SQLite database` as its offline data source and automatically synchronizes note changes with a `JWT-authenticated RESTful backend` backed by `PostgreSQL on Render`.
 
 Whether you're jotting down a quick reminder, drafting an idea, or organizing your day, Inkora combines a distraction-free interface with robust local storage and secure cloud-backed synchronization — so your notes remain available even without an internet connection and can be synced to the cloud when connectivity is available.
 
@@ -75,24 +75,24 @@ Whether you're jotting down a quick reminder, drafting an idea, or organizing yo
 - Delete notes with a single tap
 
 ### 💾 Offline-First Local Storage
-- Notes are stored locally in a **SQLite database**
+- Notes are stored locally in a `SQLite database`
 - Read, create, update, and delete notes without depending on network availability
 - Local data provides a fast and responsive note-taking experience
 - Local changes are retained until they can be synchronized with the backend
 
 ### 🔄 Automatic Cloud Sync
 - Automatically synchronizes local note data with the backend
-- Syncs changes between the local SQLite database and the **Render-hosted PostgreSQL** database
+- Syncs changes between the local SQLite database and the `Render-hosted PostgreSQL` database
 - Uses the authenticated REST API for secure synchronization
 - Keeps cloud data available across devices after successful synchronization
 </td>
 <td width="50%" valign="top">
 
 ### 🔍 Smart Note Browsing
-- **Pagination** support for large note collections
-- **Search** notes by keyword
-- **Sort** by creation date, title, and more
-- Ascending / descending **ordering**
+- `Pagination` support for large note collections
+- `Search` notes by keyword
+- `Sort` by creation date, title, and more
+- Ascending / descending `ordering`
 
 ### ⚡ Performance & UX
 - Reactive UI powered by **LiveData** & **ViewModel**
